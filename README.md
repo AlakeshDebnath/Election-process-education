@@ -41,6 +41,24 @@ You can run this project locally in seconds:
         ```
 4.  **Open your browser** and navigate to `http://localhost:8080`.
 
+## ☁️ Cloud Deployment
+
+This project is "Cloud Ready" and comes pre-configured with files for the most popular modern hosting platforms.
+
+### 1. Vercel (Recommended)
+This repository includes a `vercel.json` file ensuring secure headers and clean URLs.
+- Simply import this GitHub repository directly into your [Vercel Dashboard](https://vercel.com). Vercel will automatically detect the static files and deploy them instantly.
+
+### 2. Google Firebase Hosting
+A `firebase.json` file is included for seamless deployment to Google Cloud's Firebase.
+- Run `firebase init hosting` (don't overwrite the existing `firebase.json`)
+- Run `firebase deploy`
+
+### 3. Docker Container (AWS, Google Cloud Run, DigitalOcean)
+For enterprise/containerized environments, a production-ready `Dockerfile` running Nginx is included.
+- **Build the image**: `docker build -t india-votes-app .`
+- **Run the container**: `docker run -p 8080:80 india-votes-app`
+
 ## 📂 Project Structure
 
 ```
