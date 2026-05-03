@@ -397,18 +397,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── AI CHAT AGENT (GEMINI API) ── */
 // UPDATE THIS WITH YOUR GOOGLE AI STUDIO API KEY
-const GEMINI_API_KEY = "AIzaSyA9bIBFCEn828-V-1nWDhqSgW421VzI5Eo"; 
+const GEMINI_API_KEY = "AIzaSyA9bIBFCEn828-V-1nWDhqSgW421VzI5Eo";
+const SYSTEM_PROMPT = "You are an expert on the Indian Election process. Provide short, concise, and educational answers to questions about the Election Commission of India, EVMs, Model Code of Conduct, and voting procedures. Do not answer questions unrelated to elections or democracy.";
 
-let chatHistory = [
-  {
-    role: "user",
-    parts: [{ text: "You are an expert on the Indian Election process. Provide short, concise, and educational answers to questions about the Election Commission of India, EVMs, Model Code of Conduct, and voting procedures. Do not answer questions unrelated to elections or democracy." }]
-  },
-  {
-    role: "model",
-    parts: [{ text: "Understood. I am ready to answer questions about the Indian Election process concisely." }]
-  }
-];
+let chatHistory = [];
 
 function initChatAgent() {
   const chatFab = document.getElementById('chat-fab');
@@ -442,30 +434,47 @@ function initChatAgent() {
     
     const loadingId = addMessage("Thinking...", 'ai');
     
-    chatHistory.push({ role: "user", parts: [{ text }] });
-    
     try {
-      if (GEMINI_API_KEY === "YOUR_GEMINI_API_KEY_HERE" || !GEMINI_API_KEY) {
-        throw new Error("API Key missing! Please add your Gemini API Key in app.js (line 400).");
+      if (GEMINI_API_KEY === "YOUR_GEMINI_API_KEY_HERE" || !GEMINI_API_KEY || GEMINI_API_KEY.length < 20) {
+        throw new Error("⚠️ API Key missing or invalid! Please add your valid Gemini API Key in app.js");
       }
 
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
+      // Prepare request with system instruction
+      const contents = [
+        ...chatHistory,
+        { role: "user", parts: [{ text }] }
+      ];
+
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${GEMINI_API_KEY}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contents: chatHistory })
+        body: JSON.stringify({
+          system: { parts: [{ text: SYSTEM_PROMPT }] },
+          contents: contents
+        })
       });
 
       const data = await response.json();
-      if (data.error) throw new Error(data.error.message);
+      
+      if (data.error) {
+        throw new Error(data.error.message || "API Error");
+      }
+
+      if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+        throw new Error("Unexpected API response format");
+      }
 
       const aiText = data.candidates[0].content.parts[0].text;
       
+      // Store successful exchange in history
+      chatHistory.push({ role: "user", parts: [{ text }] });
       chatHistory.push({ role: "model", parts: [{ text: aiText }] });
+      
       updateMessage(loadingId, aiText);
 
     } catch (error) {
       updateMessage(loadingId, "⚠️ " + error.message, 'error');
-      chatHistory.pop(); // remove failed user message
+      console.error("Chat error:", error);
     }
   }
 
