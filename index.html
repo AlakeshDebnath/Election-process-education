@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>India Votes – Learn the Election Process</title>
+  <meta name="description" content="An interactive guide to understanding India's democratic election process, timelines, key bodies, and your rights as a voter." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav id="main-nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <span class="chakra">☸</span>
+        <span>India<strong>Votes</strong></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#bodies">Key Bodies</a></li>
+        <li><a href="#voter">Your Vote</a></li>
+        <li><a href="#quiz">Quiz</a></li>
+      </ul>
+      <button class="nav-cta" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">Test Knowledge</button>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-bg-circles"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🗳️ Democracy Explained</div>
+      <h1>Understanding India's<br/><span class="gradient-text">Election Process</span></h1>
+      <p class="hero-sub">From voter registration to counting of votes — explore every step of the world's largest democratic exercise, interactively.</p>
+      <div class="hero-stats">
+        <div class="stat-card"><span class="stat-num">97 Cr+</span><span class="stat-label">Registered Voters</span></div>
+        <div class="stat-card"><span class="stat-num">543</span><span class="stat-label">Lok Sabha Seats</span></div>
+        <div class="stat-card"><span class="stat-num">10 Lakh+</span><span class="stat-label">Polling Stations</span></div>
+        <div class="stat-card"><span class="stat-num">5 Years</span><span class="stat-label">Election Cycle</span></div>
+      </div>
+      <button class="btn-primary" onclick="document.getElementById('overview').scrollIntoView({behavior:'smooth'})">Start Learning ↓</button>
+    </div>
+    <div class="hero-visual">
+      <img src="hero-image.png" alt="Indian Election Hero Illustration" style="max-width: 100%; height: auto; border-radius: 16px; box-shadow: 0 0 40px rgba(255,153,51,0.15);" />
+    </div>
+  </section>
+
+  <!-- ── OVERVIEW ── -->
+  <section id="overview">
+    <div class="section-inner">
+      <div class="section-tag">What &amp; Why</div>
+      <h2 class="section-title">India's Electoral System</h2>
+      <p class="section-desc">India follows a <strong>First-Past-the-Post (FPTP)</strong> system within a Parliamentary democracy. Citizens elect representatives to the Lok Sabha (lower house) and State Assemblies every five years.</p>
+
+      <div class="cards-grid">
+        <div class="info-card" data-delay="0">
+          <div class="card-icon">🏛️</div>
+          <h3>Parliamentary Democracy</h3>
+          <p>India is a sovereign democratic republic. The President is the constitutional head, but real executive power rests with the Prime Minister and the Cabinet.</p>
+        </div>
+        <div class="info-card" data-delay="1">
+          <div class="card-icon">🗳️</div>
+          <h3>Two Types of Elections</h3>
+          <p><strong>General Elections (Lok Sabha)</strong> elect 543 MPs. <strong>State Assembly Elections (Vidhan Sabha)</strong> elect MLAs for each state legislature.</p>
+        </div>
+        <div class="info-card" data-delay="2">
+          <div class="card-icon">📍</div>
+          <h3>Constituencies</h3>
+          <p>India is divided into 543 Parliamentary constituencies. Each constituency elects one Member of Parliament (MP) using the FPTP method — the candidate with the most votes wins.</p>
+        </div>
+        <div class="info-card" data-delay="3">
+          <div class="card-icon">📱</div>
+          <h3>Electronic Voting</h3>
+          <p>India uses <strong>Electronic Voting Machines (EVMs)</strong> with VVPAT (Voter Verified Paper Audit Trail) slips to ensure transparency and accuracy in vote counting.</p>
+        </div>
+        <div class="info-card" data-delay="4">
+          <div class="card-icon">⚖️</div>
+          <h3>Universal Adult Franchise</h3>
+          <p>Every Indian citizen aged <strong>18 years and above</strong> has the right to vote, regardless of caste, religion, gender, or economic status.</p>
+        </div>
+        <div class="info-card" data-delay="5">
+          <div class="card-icon">🔒</div>
+          <h3>Secret Ballot</h3>
+          <p>Your vote is completely private. No one — not the government, party, or anyone else — can know whom you voted for. This protects voters from coercion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TIMELINE ── -->
+  <section id="timeline">
+    <div class="section-inner">
+      <div class="section-tag">Step by Step</div>
+      <h2 class="section-title">The Election Timeline</h2>
+      <p class="section-desc">Elections in India follow a precise, constitutionally mandated sequence. Click each step to explore details.</p>
+
+      <div class="timeline-container">
+        <!-- Steps injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ── KEY BODIES ── -->
+  <section id="bodies">
+    <div class="section-inner">
+      <div class="section-tag">Who Runs It?</div>
+      <h2 class="section-title">Key Constitutional Bodies</h2>
+      <p class="section-desc">Free and fair elections are protected by independent institutions with constitutional authority.</p>
+
+      <div class="bodies-grid">
+        <div class="body-card featured">
+          <div class="body-icon">⚖️</div>
+          <h3>Election Commission of India (ECI)</h3>
+          <p>An autonomous constitutional body established in 1950. Responsible for administering elections to Parliament, state legislatures, and the offices of President and Vice-President.</p>
+          <ul>
+            <li>Announces election schedule (Model Code of Conduct)</li>
+            <li>Registers political parties and manages symbols</li>
+            <li>Oversees EVMs and polling stations</li>
+            <li>Enforces the Model Code of Conduct</li>
+          </ul>
+        </div>
+        <div class="body-card">
+          <div class="body-icon">👨‍⚖️</div>
+          <h3>Chief Election Commissioner</h3>
+          <p>Heads the ECI. Appointed by the President of India. Can only be removed through a process similar to a Supreme Court judge — ensuring independence.</p>
+        </div>
+        <div class="body-card">
+          <div class="body-icon">🏢</div>
+          <h3>Returning Officers</h3>
+          <p>Each constituency has a Returning Officer (RO), usually a senior IAS officer. Responsible for conducting the election in that constituency — accepting nominations, organizing polling, and declaring results.</p>
+        </div>
+        <div class="body-card">
+          <div class="body-icon">👮</div>
+          <h3>Central & State Police Forces</h3>
+          <p>Security for polling stations is managed by central paramilitary forces (CRPF, BSF) and state police to prevent booth capturing and ensure peaceful polling.</p>
+        </div>
+        <div class="body-card">
+          <div class="body-icon">📡</div>
+          <h3>Media & Observer Corps</h3>
+          <p>The ECI deploys General Observers (IAS) and Expenditure Observers (IRS) to monitor campaigning, spending, and polling day conduct in every constituency.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── VOTER JOURNEY ── -->
+  <section id="voter">
+    <div class="section-inner">
+      <div class="section-tag">Your Vote Matters</div>
+      <h2 class="section-title">The Voter's Journey</h2>
+      <p class="section-desc">From registering to casting your ballot — here's everything you need to know as a first-time or returning voter.</p>
+
+      <div class="journey-tabs">
+        <button class="jtab active" data-tab="register">📋 Register</button>
+        <button class="jtab" data-tab="prepare">🗂️ Prepare</button>
+        <button class="jtab" data-tab="vote">🗳️ Vote</button>
+        <button class="jtab" data-tab="count">📊 Count</button>
+      </div>
+
+      <div class="journey-panels">
+        <div class="jpanel active" id="tab-register">
+          <div class="jpanel-content">
+            <h3>How to Register as a Voter</h3>
+            <div class="steps-list">
+              <div class="step-item"><span class="step-num">1</span><div><strong>Check Eligibility</strong> – You must be 18+ years old and an Indian citizen.</div></div>
+              <div class="step-item"><span class="step-num">2</span><div><strong>Visit voters.eci.gov.in</strong> or use the Voter Helpline App (available on iOS &amp; Android).</div></div>
+              <div class="step-item"><span class="step-num">3</span><div><strong>Fill Form 6</strong> – Provide your name, address, date of birth, and upload a photo.</div></div>
+              <div class="step-item"><span class="step-num">4</span><div><strong>Submit Documents</strong> – Age proof (Aadhaar, Birth Certificate) and address proof.</div></div>
+              <div class="step-item"><span class="step-num">5</span><div><strong>Receive EPIC</strong> – Your Elector's Photo Identity Card (Voter ID) will be issued.</div></div>
+            </div>
+            <div class="info-box">💡 You can also register offline at your nearest Booth Level Officer (BLO) or Electoral Registration Officer (ERO).</div>
+          </div>
+          <div class="jpanel-visual">
+            <div class="voter-id-card">
+              <div class="vic-header">ELECTION COMMISSION OF INDIA</div>
+              <div class="vic-body">
+                <div class="vic-photo"></div>
+                <div class="vic-info">
+                  <div class="vic-name">Voter Name</div>
+                  <div class="vic-detail">Father/Husband: —</div>
+                  <div class="vic-detail">DOB: DD/MM/YYYY</div>
+                  <div class="vic-detail">Part No: —</div>
+                </div>
+              </div>
+              <div class="vic-footer">EPIC No: ABC1234567</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="jpanel" id="tab-prepare">
+          <div class="jpanel-content">
+            <h3>Preparing for Polling Day</h3>
+            <div class="steps-list">
+              <div class="step-item"><span class="step-num">1</span><div><strong>Find Your Polling Station</strong> – Use electoralsearch.eci.gov.in to locate your booth.</div></div>
+              <div class="step-item"><span class="step-num">2</span><div><strong>Know Your Candidates</strong> – Research candidates' affidavits on the ECI portal before voting.</div></div>
+              <div class="step-item"><span class="step-num">3</span><div><strong>Carry Valid ID</strong> – Voter ID (EPIC) or any 12 approved alternate IDs (Aadhaar, Passport, PAN, etc.).</div></div>
+              <div class="step-item"><span class="step-num">4</span><div><strong>Check Voter Slip</strong> – Your Booth Level Officer may deliver a Voter Information Slip with your serial number.</div></div>
+              <div class="step-item"><span class="step-num">5</span><div><strong>Note Polling Hours</strong> – Usually 7 AM to 6 PM. Go early to avoid queues.</div></div>
+            </div>
+            <div class="info-box">📱 Download the <strong>cVIGIL app</strong> to report election code violations instantly.</div>
+          </div>
+          <div class="jpanel-visual">
+            <div class="checklist-visual">
+              <div class="cl-item done">✅ Check voter registration</div>
+              <div class="cl-item done">✅ Find polling station</div>
+              <div class="cl-item done">✅ Research candidates</div>
+              <div class="cl-item">☐ Carry Voter ID</div>
+              <div class="cl-item">☐ Go to polling booth</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="jpanel" id="tab-vote">
+          <div class="jpanel-content">
+            <h3>Casting Your Vote</h3>
+            <div class="steps-list">
+              <div class="step-item"><span class="step-num">1</span><div><strong>Join the Queue</strong> – Arrive at the polling station and wait in line. Separate queues for men and women.</div></div>
+              <div class="step-item"><span class="step-num">2</span><div><strong>Identity Verification</strong> – Show your EPIC/alternate ID to the polling officer. Your name is checked against the electoral roll.</div></div>
+              <div class="step-item"><span class="step-num">3</span><div><strong>Indelible Ink</strong> – Ink is applied to your left index finger to prevent double voting.</div></div>
+              <div class="step-item"><span class="step-num">4</span><div><strong>Enter Voting Compartment</strong> – You enter the private screened area with the EVM.</div></div>
+              <div class="step-item"><span class="step-num">5</span><div><strong>Press the Button</strong> – Press the blue button next to your chosen candidate on the EVM. A beep confirms your vote.</div></div>
+              <div class="step-item"><span class="step-num">6</span><div><strong>VVPAT Confirmation</strong> – A paper slip showing the candidate name and symbol is visible for 7 seconds before being cut and stored.</div></div>
+            </div>
+          </div>
+          <div class="jpanel-visual">
+            <div class="evm-demo">
+              <div class="evm-demo-title">EVM Voting Unit</div>
+              <div class="evm-demo-candidates" id="evm-candidates">
+                <!-- injected by JS -->
+              </div>
+              <div class="evm-demo-note">Press a button to simulate voting</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="jpanel" id="tab-count">
+          <div class="jpanel-content">
+            <h3>Vote Counting &amp; Results</h3>
+            <div class="steps-list">
+              <div class="step-item"><span class="step-num">1</span><div><strong>Counting Day</strong> – Usually 1–2 weeks after the last phase of polling. Announced by the ECI.</div></div>
+              <div class="step-item"><span class="step-num">2</span><div><strong>Counting Centres</strong> – Each constituency has a designated counting centre (usually a govt building) with strict security.</div></div>
+              <div class="step-item"><span class="step-num">3</span><div><strong>EVM Verification</strong> – EVMs are matched with their seals, then powered on and votes tallied round by round.</div></div>
+              <div class="step-item"><span class="step-num">4</span><div><strong>VVPAT Verification</strong> – 5 EVMs per assembly segment are randomly selected for VVPAT count to cross-verify electronic counts.</div></div>
+              <div class="step-item"><span class="step-num">5</span><div><strong>Winner Declared</strong> – The candidate with the highest votes in FPTP wins. Returning Officer issues the certificate of election.</div></div>
+            </div>
+            <div class="info-box">📺 Results are broadcast live on news channels and also on the ECI's official Results website in real time.</div>
+          </div>
+          <div class="jpanel-visual">
+            <div class="results-visual">
+              <div class="rv-bar-label">Sample Count Progress</div>
+              <div class="rv-bar"><div class="rv-fill" style="--pct:62%;--c:#FF9933">Party A — 62%</div></div>
+              <div class="rv-bar"><div class="rv-fill" style="--pct:28%;--c:#138808">Party B — 28%</div></div>
+              <div class="rv-bar"><div class="rv-fill" style="--pct:10%;--c:#000080">Others — 10%</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MODEL CODE ── -->
+  <section id="mcc">
+    <div class="section-inner">
+      <div class="section-tag">Fair Play Rules</div>
+      <h2 class="section-title">Model Code of Conduct</h2>
+      <p class="section-desc">Once the election schedule is announced, the Model Code of Conduct (MCC) kicks in immediately — binding on all parties and candidates.</p>
+      <div class="mcc-grid">
+        <div class="mcc-item allowed">
+          <div class="mcc-icon">✅</div>
+          <h4>Allowed</h4>
+          <ul>
+            <li>Peaceful public rallies with permission</li>
+            <li>Distributing party manifestos</li>
+            <li>Canvassing door-to-door</li>
+            <li>Advertising with prior approval</li>
+          </ul>
+        </div>
+        <div class="mcc-item banned">
+          <div class="mcc-icon">🚫</div>
+          <h4>Banned</h4>
+          <ul>
+            <li>Announcing new govt schemes after MCC</li>
+            <li>Using government resources for campaigning</li>
+            <li>Bribing voters (money, gifts, liquor)</li>
+            <li>Hate speech / communal appeals</li>
+            <li>Campaigning within 48 hrs of polling (silent period)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── QUIZ ── -->
+  <section id="quiz">
+    <div class="section-inner">
+      <div class="section-tag">Test Yourself</div>
+      <h2 class="section-title">Quick Knowledge Quiz</h2>
+      <p class="section-desc">Answer 8 questions and see how much you've learned about India's election process.</p>
+
+      <div class="quiz-container" id="quiz-container">
+        <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress"></div></div>
+        <div class="quiz-card" id="quiz-card">
+          <!-- injected by JS -->
+        </div>
+        <div class="quiz-nav">
+          <span class="quiz-counter" id="quiz-counter">Question 1 of 8</span>
+          <button class="btn-primary" id="quiz-next" style="display:none" onclick="quizNext()">Next →</button>
+        </div>
+        <div class="quiz-result" id="quiz-result" style="display:none">
+          <!-- result injected -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="chakra large">☸</span>
+        <div>
+          <div class="footer-brand">IndiaVotes</div>
+          <div class="footer-tagline">Empowering informed voters</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div class="fl-col">
+          <h5>Official Resources</h5>
+          <a href="https://eci.gov.in" target="_blank">Election Commission of India</a>
+          <a href="https://voters.eci.gov.in" target="_blank">Voter Registration Portal</a>
+          <a href="https://electoralsearch.eci.gov.in" target="_blank">Electoral Search</a>
+        </div>
+        <div class="fl-col">
+          <h5>Learn More</h5>
+          <a href="#overview">Electoral System</a>
+          <a href="#timeline">Election Timeline</a>
+          <a href="#bodies">Key Bodies</a>
+          <a href="#quiz">Take the Quiz</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>This is an educational resource. Not affiliated with the Election Commission of India. | Made with 🧡 for Indian Democracy</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
