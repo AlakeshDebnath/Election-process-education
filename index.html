@@ -303,6 +303,11 @@
       <p class="section-desc">Answer 8 questions and see how much you've learned about India's election process.</p>
 
       <div class="quiz-container" id="quiz-container">
+        <div class="quiz-hud" id="quiz-hud">
+          <div class="quiz-timer" id="quiz-timer">⏱️ 15s</div>
+          <div class="quiz-streak" id="quiz-streak">🔥 0</div>
+          <div class="quiz-score-display" id="quiz-score-display">🏆 0</div>
+        </div>
         <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress"></div></div>
         <div class="quiz-card" id="quiz-card">
           <!-- injected by JS -->
@@ -348,6 +353,24 @@
       <p>This is an educational resource. Not affiliated with the Election Commission of India. | Made with 🧡 for Indian Democracy</p>
     </div>
   </footer>
+
+  <!-- ── AI CHAT WIDGET ── -->
+  <div id="chat-widget">
+    <div id="chat-window" class="hidden">
+      <div class="chat-header">
+        <span>🤖 Election Assistant</span>
+        <button id="chat-close">&times;</button>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="msg ai">Namaste! 🙏 I am your AI Election Assistant. Ask me any questions you have about the Indian election process!</div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Type your question..." autocomplete="off" />
+        <button id="chat-send">➤</button>
+      </div>
+    </div>
+    <button id="chat-fab" title="Ask Election AI">💬</button>
+  </div>
 
   <script src="app.js"></script>
 </body>

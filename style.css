@@ -941,6 +941,62 @@ section:nth-child(even) {
   max-width: 700px;
 }
 
+.quiz-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.quiz-timer {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  color: var(--saffron);
+}
+
+.quiz-timer.warning {
+  color: #ef4444;
+  animation: pulse 1s infinite;
+}
+
+.quiz-streak {
+  color: #ffb703;
+  text-shadow: 0 0 10px rgba(255, 183, 3, 0.5);
+  transition: transform 0.2s;
+}
+
+.quiz-streak.hot {
+  transform: scale(1.2);
+  text-shadow: 0 0 15px rgba(255, 153, 51, 0.8);
+}
+
+.quiz-score-display {
+  background: rgba(19, 136, 8, 0.1);
+  border: 1px solid rgba(19, 136, 8, 0.3);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  color: #6ee7b7;
+}
+
+.quiz-score-display.pop {
+  animation: pop 0.4s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
 .quiz-progress-bar {
   height: 6px;
   background: rgba(255, 255, 255, 0.08);
@@ -1199,4 +1255,139 @@ section:nth-child(even) {
   .footer-links {
     margin-left: 0;
   }
+}
+
+/* ── AI CHAT WIDGET ── */
+#chat-widget {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+#chat-fab {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--saffron), #e67e00);
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(255, 153, 51, 0.4);
+  transition: transform 0.3s;
+}
+#chat-fab:hover {
+  transform: scale(1.1);
+}
+
+#chat-window {
+  width: 350px;
+  max-width: calc(100vw - 2rem);
+  height: 450px;
+  background: rgba(13, 15, 43, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--saffron);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s, transform 0.3s;
+  transform-origin: bottom right;
+}
+#chat-window.hidden {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+}
+
+.chat-header {
+  background: rgba(255, 153, 51, 0.15);
+  padding: 1rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 153, 51, 0.2);
+}
+.chat-header span {
+  color: var(--saffron);
+}
+#chat-close {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.msg {
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-width: 85%;
+}
+.msg.ai {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+}
+.msg.user {
+  background: rgba(255, 153, 51, 0.2);
+  border: 1px solid rgba(255, 153, 51, 0.3);
+  color: #fff;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+}
+.msg.error {
+  background: rgba(239, 68, 68, 0.1);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.chat-input-area {
+  padding: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+#chat-input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 0.6rem 1rem;
+  color: #fff;
+  font-family: inherit;
+}
+#chat-input:focus {
+  outline: none;
+  border-color: var(--saffron);
+}
+#chat-send {
+  background: var(--saffron);
+  color: #000;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
 }

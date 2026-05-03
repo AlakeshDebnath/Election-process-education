@@ -228,7 +228,36 @@ function initTabs() {
 }
 
 /* ── QUIZ ENGINE ── */
-let qIdx = 0, score = 0, answered = false;
+let qIdx = 0, correctCount = 0, totalPoints = 0, streak = 0, answered = false;
+let timerId = null, timeLeft = 15;
+
+function updateHUD() {
+  const timerEl = document.getElementById('quiz-timer');
+  timerEl.textContent = `⏱️ ${timeLeft}s`;
+  if (timeLeft <= 5) timerEl.classList.add('warning');
+  else timerEl.classList.remove('warning');
+
+  const streakEl = document.getElementById('quiz-streak');
+  streakEl.textContent = `🔥 ${streak}`;
+  if (streak >= 3) streakEl.classList.add('hot');
+  else streakEl.classList.remove('hot');
+
+  document.getElementById('quiz-score-display').textContent = `🏆 ${totalPoints}`;
+}
+
+function startTimer() {
+  clearInterval(timerId);
+  timeLeft = 15;
+  updateHUD();
+  timerId = setInterval(() => {
+    timeLeft--;
+    updateHUD();
+    if (timeLeft <= 0) {
+      clearInterval(timerId);
+      answerQ(-1); // Timeout
+    }
+  }, 1000);
+}
 
 function renderQuestion() {
   const q = quizQuestions[qIdx];
@@ -237,6 +266,7 @@ function renderQuestion() {
   document.getElementById('quiz-counter').textContent = `Question ${qIdx + 1} of ${quizQuestions.length}`;
   document.getElementById('quiz-next').style.display = 'none';
   document.getElementById('quiz-result').style.display = 'none';
+  document.getElementById('quiz-hud').style.display = 'flex';
 
   const card = document.getElementById('quiz-card');
   card.innerHTML = `
@@ -246,30 +276,52 @@ function renderQuestion() {
     </div>
     <div class="quiz-feedback" id="quiz-feedback"></div>`;
   answered = false;
+  startTimer();
 }
 
 function answerQ(idx) {
   if (answered) return;
   answered = true;
+  clearInterval(timerId);
+  
   const q = quizQuestions[qIdx];
   const fb = document.getElementById('quiz-feedback');
+  
   document.querySelectorAll('.quiz-opt').forEach((b, i) => {
     b.disabled = true;
     if (i === q.ans) b.classList.add('correct');
     else if (i === idx) b.classList.add('wrong');
   });
+
   if (idx === q.ans) {
-    score++;
+    let pts = 1000 + (timeLeft * 50);
+    if (streak >= 4) pts = Math.floor(pts * 2);
+    else if (streak >= 2) pts = Math.floor(pts * 1.5);
+    
+    totalPoints += pts;
+    streak++;
+    correctCount++;
+    
+    const scoreEl = document.getElementById('quiz-score-display');
+    scoreEl.classList.remove('pop');
+    void scoreEl.offsetWidth; // trigger reflow
+    scoreEl.classList.add('pop');
+    
     fb.className = 'quiz-feedback correct show';
-    fb.textContent = '✅ Correct! ' + q.explain;
+    fb.innerHTML = `✅ Correct! <strong>+${pts} pts</strong><br/>${q.explain}`;
   } else {
+    streak = 0;
     fb.className = 'quiz-feedback wrong show';
-    fb.textContent = '❌ Not quite. ' + q.explain;
+    if (idx === -1) fb.innerHTML = `⏰ Time's up! The answer was: <strong>${q.opts[q.ans]}</strong>.<br/>${q.explain}`;
+    else fb.innerHTML = `❌ Incorrect.<br/>${q.explain}`;
   }
+  
+  updateHUD();
+
   if (qIdx < quizQuestions.length - 1) {
     document.getElementById('quiz-next').style.display = 'inline-block';
   } else {
-    setTimeout(showResult, 1200);
+    setTimeout(showResult, 1500);
   }
 }
 
@@ -282,21 +334,24 @@ function showResult() {
   document.getElementById('quiz-progress').style.width = '100%';
   document.getElementById('quiz-card').innerHTML = '';
   document.getElementById('quiz-nav').style.display = 'none';
-  const pct = Math.round((score / quizQuestions.length) * 100);
-  let msg = pct >= 80 ? '🏆 Excellent! You know your democracy!' :
-            pct >= 50 ? '👍 Good job! Keep learning.' :
-                        '📚 Keep exploring — democracy deserves your attention!';
+  document.getElementById('quiz-hud').style.display = 'none';
+  
+  let rank = totalPoints >= 10000 ? '👑 Chief Election Commissioner' :
+             totalPoints >= 6000 ? '🕵️ Election Observer' :
+             totalPoints >= 3000 ? '🗳️ Informed Citizen' :
+                                   '🌱 Novice Voter';
+
   const res = document.getElementById('quiz-result');
   res.style.display = 'block';
   res.innerHTML = `
-    <div class="quiz-score">${score}/${quizQuestions.length}</div>
-    <h3>${msg}</h3>
-    <p>You scored ${pct}% on the Indian Election Process quiz.</p>
-    <button class="quiz-retry" onclick="resetQuiz()">↩ Try Again</button>`;
+    <div class="quiz-score">${totalPoints} <span style="font-size:1.5rem; color:var(--text)">pts</span></div>
+    <h3>Rank: ${rank}</h3>
+    <p>You answered ${correctCount} out of ${quizQuestions.length} correctly.</p>
+    <button class="quiz-retry" onclick="resetQuiz()">↩ Play Again</button>`;
 }
 
 function resetQuiz() {
-  qIdx = 0; score = 0; answered = false;
+  qIdx = 0; correctCount = 0; totalPoints = 0; streak = 0; answered = false;
   document.getElementById('quiz-nav').style.display = 'flex';
   renderQuestion();
 }
@@ -337,4 +392,99 @@ document.addEventListener('DOMContentLoaded', () => {
   renderQuestion();
   initNavHighlight();
   initResultBars();
+  initChatAgent();
 });
+
+/* ── AI CHAT AGENT (GEMINI API) ── */
+// UPDATE THIS WITH YOUR GOOGLE AI STUDIO API KEY
+const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE"; 
+
+let chatHistory = [
+  {
+    role: "user",
+    parts: [{ text: "You are an expert on the Indian Election process. Provide short, concise, and educational answers to questions about the Election Commission of India, EVMs, Model Code of Conduct, and voting procedures. Do not answer questions unrelated to elections or democracy." }]
+  },
+  {
+    role: "model",
+    parts: [{ text: "Understood. I am ready to answer questions about the Indian Election process concisely." }]
+  }
+];
+
+function initChatAgent() {
+  const chatFab = document.getElementById('chat-fab');
+  const chatWindow = document.getElementById('chat-window');
+  const chatClose = document.getElementById('chat-close');
+  const chatInput = document.getElementById('chat-input');
+  const chatSend = document.getElementById('chat-send');
+  const chatMessages = document.getElementById('chat-messages');
+
+  if (!chatFab || !chatWindow) return;
+
+  // Toggle Chat Window
+  chatFab.addEventListener('click', () => {
+    chatWindow.classList.remove('hidden');
+    chatInput.focus();
+  });
+  chatClose.addEventListener('click', () => chatWindow.classList.add('hidden'));
+
+  // Send Message
+  chatSend.addEventListener('click', handleSend);
+  chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') handleSend();
+  });
+
+  async function handleSend() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    
+    addMessage(text, 'user');
+    chatInput.value = '';
+    
+    const loadingId = addMessage("Thinking...", 'ai');
+    
+    chatHistory.push({ role: "user", parts: [{ text }] });
+    
+    try {
+      if (GEMINI_API_KEY === "YOUR_GEMINI_API_KEY_HERE" || !GEMINI_API_KEY) {
+        throw new Error("API Key missing! Please add your Gemini API Key in app.js (line 400).");
+      }
+
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contents: chatHistory })
+      });
+
+      const data = await response.json();
+      if (data.error) throw new Error(data.error.message);
+
+      const aiText = data.candidates[0].content.parts[0].text;
+      
+      chatHistory.push({ role: "model", parts: [{ text: aiText }] });
+      updateMessage(loadingId, aiText);
+
+    } catch (error) {
+      updateMessage(loadingId, "⚠️ " + error.message, 'error');
+      chatHistory.pop(); // remove failed user message
+    }
+  }
+
+  function addMessage(text, type) {
+    const msg = document.createElement('div');
+    msg.className = `msg ${type}`;
+    msg.textContent = text;
+    msg.id = 'msg-' + Date.now();
+    chatMessages.appendChild(msg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return msg.id;
+  }
+
+  function updateMessage(id, text, typeClass = null) {
+    const msg = document.getElementById(id);
+    if (msg) {
+      // Use innerHTML for simple markdown/line breaks if needed, but textContent is safer
+      msg.textContent = text;
+      if (typeClass) msg.classList.add(typeClass);
+    }
+  }
+}
