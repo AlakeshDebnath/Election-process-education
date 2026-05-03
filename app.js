@@ -397,7 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── AI CHAT AGENT (GEMINI API) ── */
 // UPDATE THIS WITH YOUR GOOGLE AI STUDIO API KEY
-const GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE"; 
+const GEMINI_API_KEY = "AIzaSyA9bIBFCEn828-V-1nWDhqSgW421VzI5Eo"; 
 
 let chatHistory = [
   {
